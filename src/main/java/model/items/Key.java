@@ -1,4 +1,4 @@
 package model.items;
 
-public class Key {
+public class Key extends Item{
 }

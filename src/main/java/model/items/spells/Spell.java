@@ -1,5 +1,7 @@
 package model.items.spells;
 
-public abstract class Spell {
+import model.items.Item;
+
+public abstract class Spell extends Item {
 
 }

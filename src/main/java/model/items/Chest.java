@@ -1,5 +1,5 @@
 package model.items;
 
-public class Chest {
+public class Chest extends Item{
     int value;
 }

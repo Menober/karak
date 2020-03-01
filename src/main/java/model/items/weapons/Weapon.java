@@ -1,6 +1,8 @@
 package model.items.weapons;
 
-public abstract class Weapon {
+import model.items.Item;
+
+public abstract class Weapon extends Item {
 
   int damage;
 
