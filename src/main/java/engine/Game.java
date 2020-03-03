@@ -1,5 +1,6 @@
 package engine;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
@@ -10,9 +11,18 @@ public class Game implements Runnable {
   private Thread thread;
   private BufferStrategy bs;
   private Graphics g;
+  private int width;
+  private int height;
+  private String title;
+
+  public Game(String title, int width, int height) {
+    this.title = title;
+    this.width = width;
+    this.height = height;
+  }
 
   public void initialize() {
-    display = new Display("Title", 1920, 1080);
+    display = new Display(title, width, height);
   }
 
 
@@ -27,12 +37,14 @@ public class Game implements Runnable {
     }
     g = bs.getDrawGraphics();
     //Clear Screen
-    g.clearRect(0, 0, 100, 100);
+    g.clearRect(0, 0, width, height);
     //Draw Here!
-
-   // if (State.getState() != null) {
-  //    State.getState().render(g);
-  //  }
+    g.setColor(Color.RED);
+    g.fillRect(10, 10, 2000, 2000);
+    g.drawRect(20, 30, 100, 100);
+    // if (State.getState() != null) {
+    //    State.getState().render(g);
+    //  }
 
     //End Drawing!
     bs.show();

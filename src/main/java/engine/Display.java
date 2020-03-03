@@ -2,15 +2,12 @@ package engine;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Window;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 
-public class Display extends Window {
+public class Display {
 
   private JFrame frame;
   private Canvas canvas;
@@ -19,20 +16,25 @@ public class Display extends Window {
   private int width, height;
 
   public Display(String title, int width, int height) {
-    super(new Frame());
     this.title = title;
     this.width = width;
     this.height = height;
-
     createDisplay();
+
   }
 
   private void createDisplay() {
-    frame = new JFrame(title);
+    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+    GraphicsDevice gs = ge.getDefaultScreenDevice();
+
+    frame = new JFrame(title,gs.getDefaultConfiguration());
+
     frame.setSize(width, height);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setResizable(false);
     frame.setLocationRelativeTo(null);
+    frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    frame.setUndecorated(true);
     frame.setVisible(true);
 
     canvas = new Canvas();
@@ -43,10 +45,6 @@ public class Display extends Window {
 
     frame.add(canvas);
     frame.pack();
-
-    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-    GraphicsDevice screen = ge.getDefaultScreenDevice();
-    screen.setFullScreenWindow(new Display("",100,100));
 
   }
 

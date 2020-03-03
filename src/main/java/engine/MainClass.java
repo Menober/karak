@@ -1,10 +1,14 @@
 package engine;
 
+import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -12,37 +16,27 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
-public class MainClass extends Window {
-
-  private BufferedImage pic;
-
-  public static void main(String[] args) {
+public class MainClass {
+  public static void main(String[] argv) throws Exception {
     GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-    GraphicsDevice screen = ge.getDefaultScreenDevice();
+    GraphicsDevice gs = ge.getDefaultScreenDevice();
 
-    if (!screen.isFullScreenSupported()) {
-      System.out.println("Full screen mode not supported");
-      System.exit(1);
-    }
-
-    try {
-      screen.setFullScreenWindow(new MainClass());
-    } catch (Exception e) {
-      System.err.println(e.getMessage());
-    }
-  }
-
-  public MainClass() {
-    super(new Frame());
-
-    addMouseListener(new MouseAdapter() {
-      public void mouseClicked(MouseEvent e) {
-        System.exit(0);
+    Button btn = new Button("OK");
+    btn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent evt) {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice gs = ge.getDefaultScreenDevice();
+        gs.setFullScreenWindow(null);
       }
     });
-  }
-
-  public void paint(Graphics g) {
-    g.drawImage(pic, 0, 0, getWidth(), getHeight(), this);
+    Frame frame = new Frame(gs.getDefaultConfiguration());
+    Window win = new Window(frame);
+    win.add(btn, BorderLayout.CENTER);
+    try {
+      gs.setFullScreenWindow(win);
+      win.validate();
+    } finally {
+      gs.setFullScreenWindow(null);
+    }
   }
 }
