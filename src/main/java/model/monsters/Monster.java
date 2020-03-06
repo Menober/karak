@@ -1,6 +1,8 @@
 package model.monsters;
 
-public abstract class Monster {
+import engine.Renderable;
+
+public abstract class Monster extends Renderable {
   int hp;
 
   public Monster(int hp) {
