@@ -1,21 +1,25 @@
 package model.environment;
 
 import model.items.Item;
+import model.monsters.Monster;
 
 public class TileParameters {
+
   boolean isTopOpened;
   boolean isBottomOpened;
   boolean isLeftOpened;
   boolean isRightOpened;
   Item item;
+  Monster monster;
 
   public TileParameters(boolean isTopOpened, boolean isBottomOpened, boolean isLeftOpened,
-    boolean isRightOpened, Item item) {
+    boolean isRightOpened, Item item, Monster monster) {
     this.isTopOpened = isTopOpened;
     this.isBottomOpened = isBottomOpened;
     this.isLeftOpened = isLeftOpened;
     this.isRightOpened = isRightOpened;
     this.item = item;
+    this.monster = monster;
   }
 
   public boolean isTopOpened() {
@@ -56,5 +60,13 @@ public class TileParameters {
 
   public void setItem(Item item) {
     this.item = item;
+  }
+
+  public Monster getMonster() {
+    return monster;
+  }
+
+  public void setMonster(Monster monster) {
+    this.monster = monster;
   }
 }

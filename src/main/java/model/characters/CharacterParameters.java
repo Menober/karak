@@ -1,5 +1,7 @@
 package model.characters;
 
+import model.environment.Tile;
+
 public class CharacterParameters {
 
   int hp;
@@ -9,6 +11,7 @@ public class CharacterParameters {
   int weaponsLimit;
   int chestsLimit;
   int effectsLimit;
+  Tile currentTile;
 
   public int getHp() {
     return hp;
@@ -64,5 +67,13 @@ public class CharacterParameters {
 
   public void setEffectsLimit(int effectsLimit) {
     this.effectsLimit = effectsLimit;
+  }
+
+  public Tile getCurrentTile() {
+    return currentTile;
+  }
+
+  public void setCurrentTile(Tile currentTile) {
+    this.currentTile = currentTile;
   }
 }

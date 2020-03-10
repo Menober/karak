@@ -1,8 +1,10 @@
 package engine;
 
+import engine.assets.Assets;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import model.world.Dungeon;
 
 public class Game implements Runnable {
 
@@ -14,19 +16,33 @@ public class Game implements Runnable {
   private int width;
   private int height;
   private String title;
+  private Handler handler;
+  private Renderer renderer;
 
   public Game(String title, int width, int height) {
     this.title = title;
     this.width = width;
     this.height = height;
+
+    Assets.loadAssets();
+
+    this.renderer = new Renderer();
+    this.handler = new Handler();
+    createNewGame();
   }
 
   public void initialize() {
     display = new Display(title, width, height);
   }
 
+  public void createNewGame() {
+    handler.dungeon = new Dungeon();
+
+
+  }
 
   public void update() {
+    handler.update();
   }
 
   public void render() {
@@ -38,13 +54,11 @@ public class Game implements Runnable {
     g = bs.getDrawGraphics();
     //Clear Screen
     g.clearRect(0, 0, width, height);
+    g.setColor(Color.black);
+    g.fillRect(0,0,width,height);
     //Draw Here!
-    g.setColor(Color.RED);
-    g.fillRect(10, 10, 2000, 2000);
-    g.drawRect(20, 30, 100, 100);
-    // if (State.getState() != null) {
-    //    State.getState().render(g);
-    //  }
+
+    renderer.render(handler, g);
 
     //End Drawing!
     bs.show();
